@@ -1,0 +1,20 @@
+/* ---------------linhtinh--------------- */
+.divider{
+    margin: 50px 0 50px 0;
+    height: 5px;
+}
+
+
+table {
+    border-collapse: unset !important;
+}
+
+.padding-off {
+    padding: 0 !important;
+}
+
+td,
+th {
+    text-align: center;
+    padding: 15px 5px !important;
+}

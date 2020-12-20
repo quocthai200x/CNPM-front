@@ -1,0 +1,22 @@
+/* ---------------sidenav---------------- */
+.nav-row{
+    margin-bottom: 0 !important;
+}
+.nav-col{
+    position: relative;
+    height: 200vh;
+}
+.nav-float{
+    position: fixed;
+    height: 100vh;
+    top: 20%;
+    left: 20px;
+}
+.nav-float-item{
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+.nav-float-item *{
+    margin-right: 10px;
+}
