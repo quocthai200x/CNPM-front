@@ -1,0 +1,8 @@
+.tabs .indicator {
+    background-color: #3d5afe;
+}
+
+.tabs .tab a:focus,
+.tabs .tab a:focus.active {
+    background: #e8eaf6;
+}
