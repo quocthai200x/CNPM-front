@@ -169,7 +169,6 @@ function Detail(props) {
 
     return (
         <div class="col s10 offset-s1">
-            {!fee.created_at?null:<>
             {/* <!-- title --> */}
             <div class="row list-bill-row">
                 <div class="col s5">
@@ -349,17 +348,17 @@ function Detail(props) {
 
                         <tbody>
                         {listBillSubmited.map(bill => {
-                            
-                            if (bill.isSubmitted && bill._id) {
-                                let inputPrice = 0;
-                                // console.log(bill)
-                                if (fee.type == 1) {
-                                    inputPrice = fee.price;
-                                } else if (fee.type == 2) {
-                                    inputPrice = fee.price * bill.home.members.length;
-                                }
-                                return (
-                                    <tr>
+                               
+                                if (bill.isSubmitted && bill._id) {
+                                    let inputPrice = 0;
+                                    // console.log(bill)
+                                    if (fee.type == 1) {
+                                        inputPrice = fee.price;
+                                    } else if (fee.type == 2) {
+                                        inputPrice = fee.price * bill.home.members.length;
+                                    }
+                                    return (
+                                        <tr>
                                             <td>{bill.home._id}</td>
                                             <td>{bill.home.host}</td>
                                             <td>{bill.home.address.detail}</td>
@@ -374,7 +373,6 @@ function Detail(props) {
                     </table>
                 </div>
             </div>
-            </>}
         </div>
     )
 }
