@@ -5,6 +5,7 @@ import ExpeditureDetail from "./ExpeditureDetail";
 function Expediture() {
     return (
         <div id="test1" className="col s12" style={{ padding: 0 }}>
+            <br />
             <div className="row payment-info">
                 <div className="col s4">Tổng khoản thu tháng này:</div>
                 <div className="col s4">Số khoản thu còn phải đóng:</div>
@@ -22,9 +23,9 @@ function Expediture() {
                 </thead>
             </table>
             <ul className="collapsible popout">
-            <ExpeditureDetail />
-            <ExpeditureDetail />
-            <ExpeditureDetail />
+                <ExpeditureDetail />
+                <ExpeditureDetail />
+                <ExpeditureDetail />
             </ul>
         </div>
     );
