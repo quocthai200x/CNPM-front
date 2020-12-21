@@ -1,68 +1,99 @@
-import React, { useEffect,useState } from 'react'
-import {getAllFeeAPI,getAllFeeBillAPI} from "../../../apis/fee/index"
+import React, { useEffect, useState } from 'react'
+import { getAllFeeAPI, getAllFeeBillAPI ,getFeeDoneAPI} from "../../../apis/fee/index"
+import {formatMoney} from "../../../constant/function"
 import "./index.css"
+import moment from "moment";
 
-
-const this_month =  new Date(Date.now()).getMonth() + 1;
-function Dashboard() {
-    const [year_total_fees,set_year_total_fees] = useState(0);
-    const [month_total_fees,set_month_total_fees] = useState(0);
-    const [done_fees,set_done_fees] = useState(0);
+const this_month = new Date(Date.now()).getMonth() + 1;
+function Dashboard(props) {
+    const [year_total_fees, set_year_total_fees] = useState(0);
+    const [month_total_fees, set_month_total_fees] = useState(0);
+    const [done_fees, set_done_fees] = useState(0);
     const [money_received, set_money_received] = useState(0);
-    const getDetail = (id) =>{
-        console.log("---Get detail---")
-    } 
-    const getDone = (id) =>{
-        console.log("---Get Done---");
+    const [in_process_data, set_in_process_data] = useState([])
+    const [processed_data, set_processed_data] = useState([])
+
+
+    const getDetail = (fee_id) => {
+        props.getDetail(fee_id);
     }
-
-    useEffect(()=>{
-        getAllFee()
-    },[])
-
-    const getAllFee = async () =>{
-        const res = await getAllFeeAPI();
+    const getDone = async (fee_id, index) => {
+        const res= await getFeeDoneAPI(fee_id);
         if(res.data.code == 1000){
             console.log(res.data.data);
+            // sau khi gọi done api, nếu thành công sẽ trả về 1 cái fee giống khung => chỉ việc áp lại vào bên processed_data
+            // và sau đó xóa cái ở in_process_data 
+            // sau đó phải cập nhật lại thông số trên dashboard số khoản thu xong
+            let new_in_process_data = in_process_data.filter(e => {
+                return in_process_data.indexOf(e) != index
+            });
+            set_processed_data(processed_data.concat(in_process_data[index]))
+            set_in_process_data(new_in_process_data);
+            set_done_fees(done_fees + 1);
+        }
+        else{
+            // TODO: nếu không thành công sẽ tạo 1 thông báo không thành công
+            console.log(res.data)
+        }
+
+    
+
+    }
+
+    useEffect(() => {
+        getAllFee()
+    }, [])
+
+    const getAllFee = async () => {
+        const res = await getAllFeeAPI();
+        // console.log("GET ALL FEE"+ JSON.stringify(res.data))
+        if (res.data.code == 1000) {
+            // console.log(res.data.data);
             let money = 0;
             let in_year = 0;
             let in_month = 0;
             let done = 0;
             let now = Date.now();
+            let in_process = [];
+            let processed = [];
             let month = new Date(now).getMonth();
             let year = new Date(now).getFullYear();
-            res.data.data.listFee.forEach( fee => {
+            res.data.data.listFee.forEach(fee => {
                 // tính tổng khoản thu trong năm
-                if(new Date(fee.from).getFullYear()<= year && year <= new Date(fee.to).getFullYear()){
+                if (new Date(fee.from).getFullYear() <= year && year <= new Date(fee.to).getFullYear()) {
                     in_year++;
                 }
-                if( new Date(fee.from).getMonth()<= month && month <= new Date(fee.to).getMonth()){
+                if (new Date(fee.from).getMonth() <= month && month <= new Date(fee.to).getMonth()) {
                     in_month++;
                 }
-                if(fee.isDone){
+                if (fee.isDone) {
                     done++;
+                    processed.push(fee)
+                }
+                if (!fee.isDone) {
+                    in_process.push(fee);
                 }
 
             });
-
-            res.data.data.listFee.forEach(async (fee)=>{
-                const resBill = await  getAllFeeBillAPI(null,fee._id);
-                if(resBill.data.code == 1000){
-                    resBill.data.data.forEach(bill=>{
-                        console.log("BILL "+ bill.received)
+            set_done_fees(done);
+            set_month_total_fees(in_month);
+            set_year_total_fees(in_year);
+            set_in_process_data(in_process);
+            set_processed_data(processed);
+            res.data.data.listFee.forEach(async (fee) => {
+                const resBill = await getAllFeeBillAPI(null, fee._id);
+                if (resBill.data.code == 1000) {
+                    resBill.data.data.forEach(bill => {
+                        // console.log("BILL "+ bill.received)
                         money += bill.received;
+                        set_money_received(money);
                     })
                 }
             })
-            console.log(money);
-            set_done_fees(done);
-            set_money_received(money);
-            set_month_total_fees(in_month);
-            set_year_total_fees(in_year);
-        }
-        
-    }
 
+        }
+
+    }
     return (
         <>
             {/* <!-- section dashboard --> */}
@@ -75,7 +106,7 @@ function Dashboard() {
                         </div>
                         <ul className="dashboard-ul">
                             <li>
-                                <span>&bull; Tổng tiền quỹ đã thu: </span><span>{money_received}</span>
+                                <span>&bull; Tổng tiền quỹ đã thu: </span><span>{formatMoney(money_received)}</span>
                             </li>
                             <li>
                                 <span>&bull; Tổng các khoản thu trong năm: </span><span>{year_total_fees}</span>
@@ -122,15 +153,33 @@ function Dashboard() {
                             </thead>
 
                             <tbody>
-                                <tr>
-                                    <td>KT-sdfwcd654</td>
-                                    <td>Thu tiền vệ sinh tháng 10</td>
-                                    <td>30/10/2020</td>
-                                    <td>
-                                        <a  onClick = {()=>getDone()}className="waves-effect waves-light btn green accent-3">Hoàn thành</a>
-                                        <a  onClick = {()=>getDetail()}className="waves-effect waves-light btn indigo accent-2">Chi tiết</a>
-                                    </td>
-                                </tr>
+                                {in_process_data.length != 0 ?
+                                    in_process_data.map(fee => {
+                                        // console.log(fee);
+                                        return (
+                                            <tr key={in_process_data.indexOf(fee)}>
+                                                <td>{fee._id}</td>
+                                                <td>{fee.name}</td>
+                                                <td>{moment(fee.from).format("L")} - {moment(fee.to).format("L")}</td>
+                                                <td>
+                                                    <a onClick={() => getDone(fee._id, in_process_data.indexOf(fee))} className="waves-effect waves-light btn green accent-3">Hoàn thành</a>
+                                                    <a onClick={() => getDetail(fee._id)} className="waves-effect waves-light btn indigo accent-2">Chi tiết</a>
+                                                </td>
+                                            </tr>
+                                        )
+                                    })
+                                    : <tr>
+                                        <td >---- Không còn khoản thu đang chờ xử lý ----</td>
+                                        {/* <td>null</td>
+                                        <td>{fee.name}</td>
+                                        <td>{moment(fee.from).format("L")} - {moment(fee.to).format("L")}</td>
+                                        <td>
+                                            <a onClick={() => getDone(fee._id, in_process_data.indexOf(fee))} className="waves-effect waves-light btn green accent-3">Hoàn thành</a>
+                                            <a onClick={() => getDetail(fee._id)} className="waves-effect waves-light btn indigo accent-2">Chi tiết</a>
+                                        </td> */}
+                                    </tr>
+                                }
+
                             </tbody>
                         </table>
                     </div>
@@ -147,14 +196,23 @@ function Dashboard() {
                             </thead>
 
                             <tbody>
-                                <tr>
-                                    <td>KT-sdfwcd654</td>
-                                    <td>Thu tiền vệ sinh tháng 10</td>
-                                    <td>30/10/2020</td>
-                                    <td>
-                                        <a onClick = {()=>getDetail()} className="waves-effect waves-light btn indigo accent-2">Chi tiết</a>
-                                    </td>
-                                </tr>
+                                {
+                                    processed_data.length !== 0 ? processed_data.map(fee => {
+                                        return (
+                                            <tr>
+                                                <td>{fee._id}</td>
+                                                <td>{fee.name}</td>
+                                                <td>{moment(fee.from).format("L")} - {moment(fee.to).format("L")}</td>
+                                                <td>
+                                                    <a onClick={() => getDetail(fee._id)} className="waves-effect waves-light btn indigo accent-2">Chi tiết</a>
+                                                </td>
+                                            </tr>
+                                        )
+                                    })
+                                        : <tr>
+                                            <td >---- Không có khoản thu nào đã xử lý ----</td>
+                                        </tr>
+                                }
                             </tbody>
                         </table>
                     </div>
