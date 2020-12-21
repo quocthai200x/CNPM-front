@@ -13,14 +13,16 @@ function Dashboard(props) {
     const [in_process_data, set_in_process_data] = useState([])
     const [processed_data, set_processed_data] = useState([])
 
-
+    useEffect(() => {
+        set_money_received(money_received + props.money);
+    }, [props.money])
     const getDetail = (fee_id) => {
         props.getDetail(fee_id);
     }
     const getDone = async (fee_id, index) => {
         const res= await getFeeDoneAPI(fee_id);
         if(res.data.code == 1000){
-            console.log(res.data.data);
+            // console.log(res.data.data);
             // sau khi gọi done api, nếu thành công sẽ trả về 1 cái fee giống khung => chỉ việc áp lại vào bên processed_data
             // và sau đó xóa cái ở in_process_data 
             // sau đó phải cập nhật lại thông số trên dashboard số khoản thu xong
@@ -33,7 +35,7 @@ function Dashboard(props) {
         }
         else{
             // TODO: nếu không thành công sẽ tạo 1 thông báo không thành công
-            console.log(res.data)
+            // console.log(res.data)
         }
 
     
@@ -43,6 +45,13 @@ function Dashboard(props) {
     useEffect(() => {
         getAllFee()
     }, [])
+
+
+    useEffect(() => {
+        if(props.created){
+            set_in_process_data([...in_process_data,props.created]);
+        }
+    }, [props.created])
 
     const getAllFee = async () => {
         const res = await getAllFeeAPI();
@@ -84,7 +93,7 @@ function Dashboard(props) {
                 const resBill = await getAllFeeBillAPI(null, fee._id);
                 if (resBill.data.code == 1000) {
                     resBill.data.data.forEach(bill => {
-                        console.log(bill);
+                        // console.log(bill);
                         money += bill.received;
                         set_money_received(money);
                     })

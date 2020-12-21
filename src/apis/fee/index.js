@@ -18,3 +18,7 @@ export const getAllBillAPI = (fee_id,home_id) =>{
 export const getSubmit = (bill_id = "", received = 0) =>{
     return axios.put(`/api/fee/get-submitted-bill?id=${bill_id}&received=${received}`)
 }
+
+export const createFeeAPI = (name,type,price,from,to,isRequired,description) =>{
+    return axios.post(`/api/fee?name=${name}&type=${type}&price=${price}&from=${from}&to=${to}&isRequired=${isRequired}&description=${description}`)
+}

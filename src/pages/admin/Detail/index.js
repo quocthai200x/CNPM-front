@@ -6,13 +6,14 @@ import moment from "moment"
 
 function Detail(props) {
     const [fee, setFee] = useState({
+        _id:"Không có",
         created_at: "",
-        description: "Ủng hộ thái pate muôn năm",
+        description: "Xin vui lòng ấn chi tiết",
         from: "2020-01-01T00:00:00.000Z",
         isDone: false,
         isRequired: true,
-        name: "ủng hộ Thái Stay",
-        price: 10000,
+        name: "Vui lòng ấn chi tiết",
+        price: 0,
         to: "2020-12-01T00:00:00.000Z",
         type: 0,
     });
@@ -157,13 +158,18 @@ function Detail(props) {
             let new_list_not_submit = listBillNotSubmited.filter(e => {
                 return listBillNotSubmited.indexOf(e) != index
             });
-            setlistBillNotSubmited(new_list_not_submit)
+            props.addTotalMoney(received);
+            set_completed_bill(completed_bill+ 1);
+            set_not_received_money(not_received_money- received);
+            set_received_money(received_money + received);
+            setlistBillNotSubmited(new_list_not_submit);
             setlistBillSubmited(listBillSubmited.concat(res.data.data))
         }
     }
 
     return (
         <div class="col s10 offset-s1">
+            {!fee.created_at?null:<>
             {/* <!-- title --> */}
             <div class="row list-bill-row">
                 <div class="col s5">
@@ -194,7 +200,7 @@ function Detail(props) {
                             </tr>
                         </thead>
                     </table>
-                    {fee.created_at?
+                    {/* {fee.created_at? */}
                     <ul class="collapsible">
                         <li>
                             <div class="collapsible-header padding-off">
@@ -231,8 +237,9 @@ function Detail(props) {
                                 </div>
                             </div>
                         </li>
-                    </ul>:null
-                    }
+                    </ul>
+                    {/* // :null
+                    // } */}
                 </div>
 
             </div>
@@ -342,17 +349,17 @@ function Detail(props) {
 
                         <tbody>
                         {listBillSubmited.map(bill => {
-                               
-                                if (bill.isSubmitted && bill._id) {
-                                    let inputPrice = 0;
-                                    // console.log(bill)
-                                    if (fee.type == 1) {
-                                        inputPrice = fee.price;
-                                    } else if (fee.type == 2) {
-                                        inputPrice = fee.price * bill.home.members.length;
-                                    }
-                                    return (
-                                        <tr>
+                            
+                            if (bill.isSubmitted && bill._id) {
+                                let inputPrice = 0;
+                                // console.log(bill)
+                                if (fee.type == 1) {
+                                    inputPrice = fee.price;
+                                } else if (fee.type == 2) {
+                                    inputPrice = fee.price * bill.home.members.length;
+                                }
+                                return (
+                                    <tr>
                                             <td>{bill.home._id}</td>
                                             <td>{bill.home.host}</td>
                                             <td>{bill.home.address.detail}</td>
@@ -367,6 +374,7 @@ function Detail(props) {
                     </table>
                 </div>
             </div>
+            </>}
         </div>
     )
 }

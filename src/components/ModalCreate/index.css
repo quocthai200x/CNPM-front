@@ -1,0 +1,18 @@
+.button-1 {
+    border-radius: 15px 15px 15px 15px;
+}
+
+.modal .modal-footer {
+    text-align: center;
+}
+
+.modal .modal-content {
+    text-align: center;
+}
+
+/* .modal{
+    position: fixed !important;
+    top: 0 !important;
+    right: 10 !important;
+    z-index: 9999999 !important;
+} */
