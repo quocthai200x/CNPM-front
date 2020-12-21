@@ -1,13 +1,14 @@
 import React from "react";
+import moment from "moment";
 
 function MemberInfo(props) {
-    const { name, dof, gender, idNumber } = props;
+    const { name, dob, gender, idNumber } = props;
 
     return (
         <tbody>
             <tr>
                 <td>{name}</td>
-                <td>{dof}</td>
+                <td>{moment(dob).format("L")}</td>
                 <td>{gender}</td>
                 <td>{idNumber}</td>
                 <td>

@@ -19,6 +19,9 @@ function Reward() {
             <ul class="collapsible popout">
                 <RewardDetail />
                 <RewardDetail />
+                <RewardDetail />
+                <RewardDetail />
+                <RewardDetail />
             </ul>
         </div>
     );

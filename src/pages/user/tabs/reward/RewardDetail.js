@@ -1,4 +1,5 @@
 import React from "react";
+import "./css/RewardDetail.css";
 
 function RewardDetail() {
     return (
