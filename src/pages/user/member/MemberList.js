@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import MemberInfo from "./MemberInfo";
 import Modal from "./Modal";
+import { getHomeInfoAPI } from "../../../apis/info";
 
 function MemberList() {
+    const [data, setData] = useState({});
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        getData();
+    }, []);
+
+    const getData = async () => {
+        const data = await getHomeInfoAPI();
+        setData(data.data);
+        setLoading(false);
+    };
     return (
         <div>
             <table class="highlight centered">
@@ -22,19 +35,28 @@ function MemberList() {
                         </th>
                     </tr>
                 </thead>
-
-                <MemberInfo
-                    name="Phan Đức Trọng"
-                    dof="03/05/2000"
-                    gender="Nam"
-                    idNumber="0213456789"
-                />
-                <MemberInfo
-                    name="Trọng Đức Phan"
-                    dof="03/05/2001"
-                    gender="Nam"
-                    idNumber="0213456789"
-                />
+                <>
+                    {loading ? (
+                        <MemberInfo
+                            name="Loading"
+                            dob="Loading"
+                            gender="Loading"
+                            idNumber="Loading"
+                        />
+                    ) : (
+                        data.members.map((member) => (
+                            <MemberInfo
+                                name={member.name}
+                                dob={member.dob}
+                                gender={
+                                    member.gender ? member.gender : "Không có"
+                                }
+                                idNumber={member.cmnd}
+                                key={member._id}
+                            />
+                        ))
+                    )}
+                </>
             </table>
             <Modal />
             <br />
