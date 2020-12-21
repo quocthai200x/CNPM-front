@@ -1,5 +1,7 @@
 import React from "react";
 import moment from "moment";
+import ModalChangeInfo from "./ModalChangeInfo";
+import { updatePersonAPI } from "../../../apis/info";
 
 function MemberInfo(props) {
     const { name, dob, gender, idNumber } = props;

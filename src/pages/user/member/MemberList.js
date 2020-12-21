@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import MemberInfo from "./MemberInfo";
-import Modal from "./Modal";
+import ModalAddMember from "./ModalAddMember";
 import { getHomeInfoAPI } from "../../../apis/info";
 
 function MemberList() {
-    const [data, setData] = useState({});
+    const [members, setMembers] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -13,8 +13,13 @@ function MemberList() {
 
     const getData = async () => {
         const data = await getHomeInfoAPI();
-        setData(data.data);
+        setMembers(data.data.members);
         setLoading(false);
+    };
+    const addPersonToList = (person) => {
+        // chiỉnh suaâaa list: cu phap es6
+        // them person vao liít
+        setMembers([...members, person]);
     };
     return (
         <div>
@@ -27,7 +32,7 @@ function MemberList() {
                         <th>Số CMT</th>
                         <th>
                             <button
-                                data-target="add-info"
+                                data-target="add-member"
                                 class="waves-effect waves-dark btn-small white black-text modal-trigger"
                             >
                                 Thêm thành viên
@@ -44,7 +49,7 @@ function MemberList() {
                             idNumber="Loading"
                         />
                     ) : (
-                        data.members.map((member) => (
+                        members.map((member) => (
                             <MemberInfo
                                 name={member.name}
                                 dob={member.dob}
@@ -58,7 +63,7 @@ function MemberList() {
                     )}
                 </>
             </table>
-            <Modal />
+            <ModalAddMember addPerson={(person) => addPersonToList(person)} />
             <br />
         </div>
     );

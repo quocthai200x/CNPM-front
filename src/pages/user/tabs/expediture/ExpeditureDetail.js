@@ -28,13 +28,7 @@ function ExpeditureDetail({ data }) {
                 <div className="indigo-text text-accent-3">
                     Mô tả khoản thu:
                 </div>
-                <div>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Recusandae eveniet adipisci nesciunt ea aspernatur magni,
-                    veniam consequuntur qui dolorem, nulla, quibusdam eos minus.
-                    Consequuntur accusamus repudiandae distinctio harum pariatur
-                    veritatis!
-                </div>
+                <div>{data.description}</div>
                 <br />
                 <div className="row">
                     <div className="col s6" style={{ padding: 0, margin: 0 }}>
@@ -48,7 +42,9 @@ function ExpeditureDetail({ data }) {
                             <span className="indigo-text text-accent-3">
                                 Yêu cầu:
                             </span>
-                            <span>bắt buộc</span>
+                            <span>
+                                {data.isRequired ? " bắt buộc" : " tự nguyện"}
+                            </span>
                         </div>
                     </div>
                 </div>
