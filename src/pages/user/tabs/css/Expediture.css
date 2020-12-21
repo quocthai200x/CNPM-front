@@ -1,0 +1,17 @@
+td,
+th {
+    text-align: center;
+    padding: 15px 5px !important;
+}
+
+.padding-off {
+    padding: 0 !important;
+}
+
+.collapsible-body {
+    background-color: #ddd;
+}
+
+.collapsible {
+    margin: 0;
+}
