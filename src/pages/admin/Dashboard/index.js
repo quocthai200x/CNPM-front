@@ -84,7 +84,7 @@ function Dashboard(props) {
                 const resBill = await getAllFeeBillAPI(null, fee._id);
                 if (resBill.data.code == 1000) {
                     resBill.data.data.forEach(bill => {
-                        // console.log("BILL "+ bill.received)
+                        console.log(bill);
                         money += bill.received;
                         set_money_received(money);
                     })
