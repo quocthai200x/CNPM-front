@@ -25,7 +25,7 @@ function Modal(props) {
                         <input id="name" type="text" className="validate" 
                             value = {_name} onChange = {(e)=>set_name(e.target.value)}
                         />
-                        <label for="name">Tên khoản thu</label>
+                        <label for="name" >Tên khoản thu</label>
                     </div>
                 </div>
                 <div className="row">
@@ -80,8 +80,8 @@ function Modal(props) {
             <div className="modal-footer">
                 <a 
                     onClick = {()=>createFee()}
-                    // href="#!" className="modal-close waves-effect waves-green btn-flat"
-                    >Tạo</a>
+                    href="#!" className="button white-text indigo accent-2  modal-close waves-effect waves-green btn-flat"
+                >Tạo</a>
             </div>
         </div>
     )

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { getAllFeeAPI, getAllFeeBillAPI ,getFeeDoneAPI} from "../../../apis/fee/index"
-import {formatMoney} from "../../../constant/function"
+import { getAllFeeAPI, getAllFeeBillAPI ,getFeeDoneAPI} from "../../../../apis/fee/index"
+import {formatMoney} from "../../../../constant/function"
 import "./index.css"
 import moment from "moment";
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import "./index.css"
-import { getAllFeeBillAPI, getAllFeeAPI, getSubmit } from "../../../apis/fee/index"
-import { formatMoney } from "../../../constant/function"
+import { getAllFeeBillAPI, getAllFeeAPI, getSubmit } from "../../../../apis/fee/index"
+import { formatMoney } from "../../../../constant/function"
 import moment from "moment"
 
 function Detail(props) {
