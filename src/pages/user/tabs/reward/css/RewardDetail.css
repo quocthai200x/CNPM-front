@@ -1,0 +1,20 @@
+.remove-icon {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: -8px;
+    right: -14px;
+}
+
+.detail-gift__title {
+    color: #3d5afe;
+    padding-bottom: 5px;
+}
+
+.card-file {
+    position: relative;
+}

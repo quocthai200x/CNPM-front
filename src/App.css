@@ -1,19 +1,31 @@
 * {
-  margin: 0px;
-  padding: 0px;
-  box-sizing: border-box;
-  font-family: Averta;
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: Averta;
 }
 
-h1,h2,h3,h4,h5{
-  margin: 0;
+h1,
+h2,
+h3,
+h4,
+h5 {
+    margin: 0;
 }
+
+h5 {
+    font-size: 17px;
+}
+
 @font-face {
-  font-family: Averta;
-  src: url(./fonts/Averta\ Bold.otf);
+    font-family: Averta;
+    src: url(./fonts/Averta\ Bold.otf);
 }
 
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
+table {
+    /* padding-bottom: 10px; */
+}
