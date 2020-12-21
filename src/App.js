@@ -8,7 +8,7 @@ function App() {
     return (
         <BrowserRouter>
             <Route path="/admin" component={AdminPage}></Route>
-            <Route path="/" component={UserPage}></Route>
+            <Route path="/user" component={UserPage}></Route>
         </BrowserRouter>
     );
 }
