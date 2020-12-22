@@ -117,13 +117,17 @@ function Detail(props) {
                 dataBills.forEach(bill => {
                     tong_ho++;
                     if (dataDetail.type == 1) {
-                        tong_tien_phai_thu += dataDetail.price;
+                        if(dataDetail.isRequired){
+                            tong_tien_phai_thu += dataDetail.price;
+                        }
                         if (bill.isSubmitted) {
                             tien_da_thu += dataDetail.price;
                             
                         }
                     } else if (dataDetail.type == 2) {
-                        tong_tien_phai_thu += (dataDetail.price * bill.home.members.length);
+                        if(dataDetail.isRequired){
+                            tong_tien_phai_thu += (dataDetail.price * bill.home.members.length);
+                        }
                         if (bill.isSubmitted) {
                             tien_da_thu += (dataDetail.price * bill.home.members.length);
                             
@@ -136,7 +140,9 @@ function Detail(props) {
                         notSubmit.push(bill)
                     }
                 })
-                tien_chua_thu = tong_tien_phai_thu - tien_da_thu;
+                if(dataDetail.isRequired){
+                    tien_chua_thu = tong_tien_phai_thu - tien_da_thu;
+                }
                 set_total_bill(tong_ho);
                 set_total_fee(tong_tien_phai_thu);
                 set_completed_bill(don_hoan_thanh);
@@ -152,7 +158,7 @@ function Detail(props) {
 
     const getSubmitted = async (bill_id,received,index) =>{
         const res = await getSubmit(bill_id,received);
-        // console.log(res);
+        console.log(received);
         if(res.data.code == 1000){
             // 
             let new_list_not_submit = listBillNotSubmited.filter(e => {
@@ -160,7 +166,9 @@ function Detail(props) {
             });
             props.addTotalMoney(received);
             set_completed_bill(completed_bill+ 1);
-            set_not_received_money(not_received_money- received);
+            if(fee.isRequired){
+                set_not_received_money(not_received_money- received);
+            }
             set_received_money(received_money + received);
             setlistBillNotSubmited(new_list_not_submit);
             setlistBillSubmited(listBillSubmited.concat(res.data.data))
@@ -315,9 +323,13 @@ function Detail(props) {
                                             <td >
                                                 {fee.isRequired ?
                                                     <span class="center-align">{formatMoney(inputPrice)}</span>
-                                                    :<input type="text" value={formatMoney(inputPrice)} onchange={(e) => {
-                                                        inputPrice = e.target.value;
+                                                    :<input type="number" onChange={(e) => {
+                                                        if(e.target.value){
+                                                            inputPrice = e.target.value;
+                                                        }
+                                                        inputPrice = 0;
                                                     }} 
+                                                    placeholder = {inputPrice}
                                                     class="center-align" />
                                                 }
 

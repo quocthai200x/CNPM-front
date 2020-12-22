@@ -37,9 +37,6 @@ function Dashboard(props) {
             // TODO: nếu không thành công sẽ tạo 1 thông báo không thành công
             // console.log(res.data)
         }
-
-    
-
     }
 
     useEffect(() => {

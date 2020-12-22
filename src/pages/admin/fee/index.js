@@ -1,10 +1,10 @@
 import React,{useState} from 'react';
-import Navbar from '../../../components/navbar';
 import SideNav from "../../../components/sidenav"
-import { linkAdmin } from "../../../constant/linkNavBar";
 import Dashboard from "./Dashboard"
 import Detail  from "./Detail"
 import ModalCreate from "../../../components/ModalCreate/index"
+import { menuFee } from "../../../constant/adminMenu"
+
 import "./index.css"
 function AdminPage(){
     const [feeID_detail,set_feeID_detail] = useState(null);
@@ -21,10 +21,10 @@ function AdminPage(){
     return (
         <>      
             <ModalCreate created = {(data)=>setCreated(data)}/>
-            <Navbar title="Cán bộ" listLink={linkAdmin} ></Navbar>
+            
             <div className="body">
                 <div className="row nav-row">
-                    <SideNav></SideNav>
+                    <SideNav modal_id = "#add-fee" buttonName = "Thêm khoản thu" menu = {menuFee}></SideNav>
                     <div class="col s10 ">
                         <div className="row">
                             <Dashboard created = {created} money = {money} getDetail = {(fee_id)=>getDetail(fee_id)}></Dashboard>

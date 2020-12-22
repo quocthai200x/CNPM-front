@@ -1,6 +1,6 @@
 import React from 'react'
 import "./index.css"
-import { menu } from "../../constant/adminMenu"
+
 // import ModelCreate from "../ModalCreate/index"
 
 function SideNav(props) {
@@ -9,10 +9,11 @@ function SideNav(props) {
             <div className="nav-float white-text">
                 <div className="nav-float-item">
                     <a
-                        href="#add-fee"
+                        href={props.modal_id}
                         className="waves-effect waves-dark btn white indigo-text darken-3 modal-trigger"><i
-                            className="material-icons left">add</i>Thêm khoản thu</a>                </div>
-                {menu.map((item) => {
+                            className="material-icons left">add</i>{props.buttonName}</a>
+                        </div>
+                {props.menu.map((item) => {
                     return (
                         <div className="nav-float-item">
                             <i className="material-icons">{item.icon}</i>

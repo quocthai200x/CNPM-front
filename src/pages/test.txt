@@ -1,0 +1,39 @@
+import React,{useState} from 'react'
+import axios from "axios";
+function Test() {
+    const [_image, set_image] = useState(undefined);
+    const submit = (e) =>{
+        e.preventDefault();
+        let form = new FormData();
+        form.append("image", _image)
+        var settings = {
+            "url": `https://api.imgur.com/3/image`,
+            "method": "POST",
+            "timeout": 0,
+            "headers": {
+                "Authorization": "Client-ID 546c25a59c58ad7 "
+            },
+            "processData": false,
+            "mimeType": "multipart/form-data",
+            "contentType": false,
+            "data": form
+        };
+
+        axios(settings).then((res) => {
+            if(res.data.status == 200){
+                console.log(res.data.data.link);
+            }
+        }).catch(e=>{
+            console.log(e)
+        })
+    }
+    return (
+        <div>
+            <input id="upload-img" type="file" name="file" accept=".jpg"   
+            onChange={(e)=>set_image(e.target.files[0])} />
+            <button onClick = {(e)=>submit(e)}>Nộp</button>
+        </div>
+    )
+}
+
+export default Test

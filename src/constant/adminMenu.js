@@ -1,4 +1,4 @@
-export const menu = [
+export const menuFee = [
     {
         icon:"dashboard",
         name:"Tổng quan",
@@ -23,4 +23,30 @@ export const menu = [
         link:"#dsht",
     },
 
+]
+
+export const menuAward = [
+    {
+        icon:"dashboard",
+        name:"Tổng quan",
+        link:"#tongquan",
+    },
+
+    {
+        icon:"format_list_numbered",
+        name:"Danh sách phần thưởng",
+        link:"#dskt",
+    },
+
+    {
+        icon:"description",
+        name:"Chi tiết phần thưởng",
+        link:"#ctkt",
+    },
+
+    {
+        icon:"format_list_numbered",
+        name:"Danh sách phát thưởng",
+        link:"#dsht",
+    },
 ]
