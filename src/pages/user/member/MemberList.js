@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import MemberInfo from "./MemberInfo";
 import ModalAddMember from "./ModalAddMember";
+import ModalChangeInfo from "./ModalChangeInfo";
 import { getHomeInfoAPI } from "../../../apis/info";
 
 function MemberList() {
@@ -58,12 +59,14 @@ function MemberList() {
                                 }
                                 idNumber={member.cmnd}
                                 key={member._id}
+                                id={member._id}
                             />
                         ))
                     )}
                 </>
             </table>
             <ModalAddMember addPerson={(person) => addPersonToList(person)} />
+            <ModalChangeInfo />
             <br />
         </div>
     );

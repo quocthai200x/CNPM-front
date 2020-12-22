@@ -18,3 +18,7 @@
 .card-file {
     position: relative;
 }
+
+.gift-list tr {
+    background-color: #ffffff;
+}

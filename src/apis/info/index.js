@@ -27,16 +27,9 @@ export const addMemberAPI = (
     });
 };
 
-export const updatePersonAPI = (
-    name,
-    dob,
-    home_id,
-    work_at,
-    idNumber,
-    gender
-) => {
+export const updatePersonAPI = (name, dob, id, work_at, idNumber, gender) => {
     return axios.put(
-        `/api/person?name=${name}&dob=${dob}&home=${home_id}&work_at=${work_at}&cmnd=${idNumber}&gender=${gender}`
+        `/api/person?name=${name}&dob=${dob}&id=${id}&cmnd=${idNumber}&work_at=${work_at}&gender=${gender}`
     );
 };
 
