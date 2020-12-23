@@ -1,18 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import "./css/RewardDetail.css";
+import moment from "moment";
+import { getAwardDetailAPI } from "../../../../apis/award/";
+const home_id = "5fddc65e51423d30f8bb52cd";
 
-function RewardDetail() {
+function RewardDetail(props) {
+    const { id, name, type, isDone, from, to, description, gifts } = props;
+    const [childList, set_childList] = useState([]);
+    useEffect(() => {
+        getChildList();
+    }, []);
+
+    const getChildList = async () => {
+        const res = await getAwardDetailAPI(id, type, home_id);
+        console.log(res.data.data);
+        set_childList(res.data.data);
+    };
+
     return (
         <li>
             <div class="collapsible-header padding-off">
                 <table class="highlight centered">
                     <tbody>
                         <tr>
-                            <td class="col s2">HSGK-20</td>
-                            <td class="col s3">Học sinh giỏi, khá 2020</td>
-                            <td class="col s2">Có</td>
-                            <td class="col s3">30/10/2020-30/11/2020</td>
+                            <td class="col s2">{id}</td>
+                            <td class="col s3">{name}</td>
+                            <td class="col s2">
+                                {type === 1 ? "Không" : "Có"}
+                            </td>
+                            <td class="col s3">
+                                {moment(from).format("L")}-
+                                {moment(to).format("L")}
+                            </td>
                             <td class="col s2 orange-text text-lighten-2">
-                                Đang xử lý
+                                {isDone ? "Đã xử lý" : "Đang xử lý"}
                             </td>
                         </tr>
                     </tbody>
@@ -23,14 +44,7 @@ function RewardDetail() {
                     <div class="col s9">
                         <div>
                             <div class="detail-gift__title">Mô tả</div>
-                            <span>
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Quaerat omnis ipsam doloremque
-                                quisquam tempore laudantium incidunt soluta
-                                dolorem numquam consequatur eum corrupti
-                                aspernatur, modi labore error illum praesentium
-                                alias. Tenetur.
-                            </span>
+                            <span>{description}</span>
                         </div>
                         <div>
                             <div class="detail-gift__title">Phần thưởng</div>
@@ -39,14 +53,16 @@ function RewardDetail() {
                                     class="col s6 highlight gift-list"
                                     style={{ padding: 0 }}
                                 >
-                                    <tr>
-                                        <td class="col s6">Học sinh giỏi</td>
-                                        <td class="col s6">7 quyển vở</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="col s6">Học sinh khá</td>
-                                        <td class="col s6">5 quyển vở</td>
-                                    </tr>
+                                    {gifts.map((gift) => (
+                                        <tr>
+                                            <td class="col s6">
+                                                {gift.awardFor}
+                                            </td>
+                                            <td class="col s6">
+                                                {gift.quantity} {gift.name}
+                                            </td>
+                                        </tr>
+                                    ))}
                                 </table>
                             </div>
 
@@ -81,15 +97,41 @@ function RewardDetail() {
                                     </div>
                                 </div>
                             </div>
+                            <div>
+                                <div>Danh sách các cháu</div>
+                                <div>
+                                    {childList.map((child) => (
+                                        <div class="row">
+                                            <div class="col s9">
+                                                <div>
+                                                    Tên: {child.person.name}
+                                                </div>
+                                            </div>
+                                            <div class="col s3 right-align">
+                                                <button
+                                                    data-target="add-proof"
+                                                    class="button-1 waves-effect waves-light indigo accent-3 white-text btn-small modal-trigger"
+                                                >
+                                                    Thêm hồ sơ
+                                                </button>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col s3 right-align">
-                        <button
-                            data-target="add-proof"
-                            class="button-1 waves-effect waves-light indigo accent-3 white-text btn-small modal-trigger"
-                        >
-                            Thêm hồ sơ
-                        </button>
+                        {type === 1 ? (
+                            <></>
+                        ) : (
+                            <button
+                                data-target="add-proof"
+                                class="button-1 waves-effect waves-light indigo accent-3 white-text btn-small modal-trigger"
+                            >
+                                Thêm hồ sơ
+                            </button>
+                        )}
                     </div>
                 </div>
             </div>
