@@ -18,10 +18,12 @@ function Expediture() {
     }, []);
 
     const getData = async () => {
-        const data = await getAllFeeAPI(id);
-        setData(data.data.data);
-        console.log(data.data.data);
-        setLoading(false);
+        const data = await getAllFeeAPI();
+        if(data.data.code == 1000){
+            console.log(data.data.data);
+            setData(data.data.data);
+            setLoading(false);
+        }
     };
     return (
         <div id="test1" className="col s12" style={{ padding: 0 }}>

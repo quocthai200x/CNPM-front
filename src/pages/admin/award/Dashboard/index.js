@@ -13,6 +13,15 @@ function DashBoard(props) {
     const [_awardList, set_awardList] = useState([])
     const [_doneList, set_doneList] = useState([])
 
+
+
+    useEffect(() => {
+        if(props.created){
+            set_awardList([..._awardList,props.created]);
+        }
+    }, [props.created])
+
+
     useEffect(() => {
         getAllAward()
     }, [])
@@ -21,7 +30,7 @@ function DashBoard(props) {
     }
     const getDone = async (award_id, type, index) => {
         const res= await getAwardDoneAPI(award_id,type);
-        console.log(res)
+        // console.log(res)
         if(res.data.code == 1000){
             // console.log(res.data.data);
             // sau khi gọi done api, nếu thành công sẽ trả về 1 cái fee giống khung => chỉ việc áp lại vào bên processed_data

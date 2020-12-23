@@ -12,7 +12,7 @@ function Verify(props) {
 
 
     return (
-        <div id="da-gui" className="col s12" style={{ padding: 0 }}>
+        <div id="da-xac-minh" className="col s12" style={{ padding: 0 }}>
             <br />
             <table className="highlight centered">
                 <thead className="card-panel indigo accent-2">

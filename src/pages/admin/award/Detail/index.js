@@ -5,6 +5,8 @@ import { formatMoney } from "../../../../constant/function"
 import moment from "moment"
 import { getAllAwardAPI, getAwardDetailsAPI } from '../../../../apis/award'
 import TabContainer from './tab1/TabContainer'
+import TabContainer2 from './tab2/TabContainer2'
+import ImageView from '../../../../components/imageView/imageView'
 
 
 function Detail(props) {
@@ -28,7 +30,7 @@ function Detail(props) {
         isDone: false,
         name: "Quà mẫu",
         to: "2021-01-01T00:00:00.000Z",
-        type: 1,
+        type: 2,
         _id: "ID mẫu"
     });
     const [_rewarded, set_rewarded] = useState([]);
@@ -43,7 +45,11 @@ function Detail(props) {
 
     useEffect(() => {
         getData();
-        // console.log("SAU KHI RUYỀN: "+ props.fee_id)
+        // const script = document.createElement("script");
+        // script.src = "./tab.js";
+        // script.async = true;
+        // document.body.appendChild(script);
+        
     }, [props.award_id])
 
 
@@ -169,8 +175,21 @@ function Detail(props) {
 
     // console.log("AWareded" + _rewarded);
     // console.log("_NOT" + _not_rewarded[0]);
+    const updateInfo = (list) =>{
+        let total_money = 0;
+        let completed_person = 0;
+        list.forEach(gift=>{
+            total_money+= gift.gifts[0].price*gift.gifts[0].quantity;
+            completed_person++;
+        })
+        set_total_money(_total_money+ total_money);
+        set_completed_person(_completed_person + completed_person);
+        set_home_done(_home_done + 1);
 
+    }
     return (
+        <>
+        <ImageView></ImageView>
         <div class="col s10 offset-s1">
             {/* <!-- title --> */}
             <div class="row list-bill-row">
@@ -290,9 +309,12 @@ function Detail(props) {
             {award.type == 1?
                 <TabContainer type = {award.type} not_award = {_not_rewarded} award = {_rewarded}></TabContainer>
                 :
-                null}
+                <TabContainer2 updateInfo= {(list)=>updateInfo(list)} gifts = {award.gifts} type = {award.type} waiting = {_waiting_list} not_award = {_not_rewarded} award = {_rewarded}></TabContainer2>
+                
+                }
            
         </div>
+        </>
     )
 }
 

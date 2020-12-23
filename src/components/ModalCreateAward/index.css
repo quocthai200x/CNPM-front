@@ -1,0 +1,29 @@
+.button-1 {
+    border-radius: 15px 15px 15px 15px;
+}
+
+.modal .modal-footer {
+    text-align: center;
+}
+
+.modal .modal-content {
+    text-align: center;
+}
+.button{
+    border-radius: 10px;
+    /* padding-left: 10px;
+    padding-right:10px;
+    padding-top: 6px;
+    padding-bottom: 6px; */
+    /* text-align: center; */
+}
+.icon-backspace{
+    cursor: pointer;
+    marign: 10px;
+}
+/* .modal{
+    position: fixed !important;
+    top: 0 !important;
+    right: 10 !important;
+    z-index: 9999999 !important;
+} */

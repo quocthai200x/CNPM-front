@@ -158,7 +158,7 @@ function Detail(props) {
 
     const getSubmitted = async (bill_id,received,index) =>{
         const res = await getSubmit(bill_id,received);
-        console.log(received);
+        // console.log(received);
         if(res.data.code == 1000){
             // 
             let new_list_not_submit = listBillNotSubmited.filter(e => {

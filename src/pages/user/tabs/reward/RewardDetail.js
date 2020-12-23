@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./css/RewardDetail.css";
 import moment from "moment";
-import { getAwardDetailAPI } from "../../../../apis/award/";
+import {getAwardDetailsAPI}  from "../../../../apis/award/";
 const home_id = "5fddc65e51423d30f8bb52cd";
 
 function RewardDetail(props) {
@@ -12,7 +12,7 @@ function RewardDetail(props) {
     }, []);
 
     const getChildList = async () => {
-        const res = await getAwardDetailAPI(id, type, home_id);
+        const res = await getAwardDetailsAPI(id, type, home_id);
         console.log(res.data.data);
         set_childList(res.data.data);
     };

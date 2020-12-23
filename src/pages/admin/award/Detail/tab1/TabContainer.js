@@ -7,7 +7,7 @@ function TabContainer(props) {
     const [_not_award, set_not_award] = useState([])
     const [_award, set_award] = useState([]);
     useEffect(() => {
-        console.log(props.award)
+        // console.log(props.award)
         set_not_award(props.not_award)
         set_award(props.award);
     }, [props.not_award,props.award])
@@ -16,7 +16,7 @@ function TabContainer(props) {
         // TODO : GỌI API
         listID.forEach(async(id)=>{
             const res= await getSubmitAPI(id,props.type);
-            console.log(res);
+            // console.log(res);
         })
         let new_list_not_submit = _not_award.filter(e => {
             return _not_award.indexOf(e) != index

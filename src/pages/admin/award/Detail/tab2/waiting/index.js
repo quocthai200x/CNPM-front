@@ -4,15 +4,14 @@ import Detail from "./detail";
 function Verify(props) {
     const [_list, set_list] = useState([])
     useEffect(() => {
-        // console.log("Props:")
-        // console.log(props.award);
-        // console.log("------")
-        set_list(props.award);
-    }, [props.award])
+        set_list(props.waiting);
+    }, [props.waiting])
 
-
+    const verify =(list,index) =>{
+        props.verify(list,index);
+    }
     return (
-        <div id="da-gui" className="col s12" style={{ padding: 0 }}>
+        <div id="cho-xac-minh" className="col s12" style={{ padding: 0 }}>
             <br />
             <table className="highlight centered">
                 <thead className="card-panel indigo accent-2">
@@ -32,7 +31,7 @@ function Verify(props) {
                         // console.log(_list);
                         // console.log("--------------");
                         return (
-                            <Detail home={home} />
+                            <Detail verify = {(list)=>verify(list,_list.indexOf(home))} gifts = {props.gifts} home={home} />
                         )
                     })}
             </ul>
