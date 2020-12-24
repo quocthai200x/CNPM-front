@@ -9,14 +9,7 @@ function UserPage() {
         <div>
             <NavBar title="Hộ gia đình" listLink={[{}]} />
             <div className="body container">
-                <UserInfo
-                    id="123"
-                    name="Phan Đức Trọng"
-                    phone="012345678"
-                    address="Hanoi"
-                    totalPerson="6"
-                    totalChild="2"
-                />
+                <UserInfo />
                 <MemberList />
                 <TabContainer />
             </div>

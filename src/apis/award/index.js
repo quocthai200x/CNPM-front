@@ -10,8 +10,10 @@ export const getAwardDetailAPI = (award_id, type, home_id) => {
     );
 };
 
-// export const updateImageAPI = () => {
-//     return axios.put(`/api/award/update-image-rank`, {
-
-//     })
-// }
+export const imageUploadAPI = (image, rank, id) => {
+    return axios.put(`/api/award/update-image-rank`, {
+        image,
+        rank,
+        id,
+    });
+};

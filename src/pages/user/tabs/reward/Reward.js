@@ -14,7 +14,7 @@ function Reward() {
     const getReward = async () => {
         const res = await getAllAwardAPI();
         set_reward(res.data.data);
-        console.log(res.data.data);
+        // console.log(res.data.data);
     };
 
     return (
@@ -43,11 +43,12 @@ function Reward() {
                             to={item.to}
                             description={item.description}
                             gifts={item.gifts}
+                            key={item._id}
                         />
                     ))}
                 </ul>
             </div>
-            <ModalUpload />
+            {/* <ModalUpload /> */}
         </>
     );
 }

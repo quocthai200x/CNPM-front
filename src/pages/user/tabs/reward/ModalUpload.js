@@ -1,17 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "../../member/css/Modal.css";
+// import "../../member/css/Modal.css";
+import { imageLink } from "../../../../constant/image";
+import { imageUploadAPI, updateImageAPI } from "../../../../apis/award";
 
-// import ImageUploader from "react-images-upload";
-
-function ModalUpload() {
-    const [_name, set_name] = useState("");
-    const [_achievement, set_achievement] = useState("");
+function ModalUpload(props) {
+    const [_rank, set_rank] = useState("");
     const [_image, set_image] = useState("");
+    const [link, set_link] = useState(imageLink);
+
+    useEffect(() => {
+        uploadImgur();
+    }, [_image]);
 
     // -----------------------
-    const submit = (e) => {
-        // e.preventDefault();
+    const uploadImgur = () => {
         let form = new FormData();
         form.append("image", _image);
         var settings = {
@@ -31,6 +34,7 @@ function ModalUpload() {
             .then((res) => {
                 if (res.data.status == 200) {
                     console.log(res.data.data.link);
+                    set_link(res.data.data.link);
                 }
             })
             .catch((e) => {
@@ -38,29 +42,20 @@ function ModalUpload() {
             });
     };
     // -----------------------
+    const onSubmitImage = () => {
+        imageUploadAPI(link, _rank, props.awardId);
+    };
 
     return (
         <div id="add-proof" class="modal">
             <div class="modal-content">
                 <h4>Thêm hồ sơ nhận phần thưởng</h4>
-                <div class="row">
-                    <div class="input-field col s12">
-                        <input
-                            id="name"
-                            type="text"
-                            class="validate"
-                            value={_name}
-                            onChange={(e) => set_name(e.target.value)}
-                        />
-                        <label for="name">Họ và tên</label>
-                    </div>
-                </div>
 
                 <div class="row">
                     <div class="input-field col s12">
                         <select
-                            value={_achievement}
-                            onChange={(e) => set_achievement(e.target.value)}
+                            value={_rank}
+                            onChange={(e) => set_rank(e.target.value)}
                         >
                             <option value="" disabled selected>
                                 Chọn thành tích
@@ -81,24 +76,24 @@ function ModalUpload() {
                             id="proof"
                             type="file"
                             accept="image/*"
-                            class="validate"
+                            // class="validate"
                             onChange={(e) => {
                                 set_image(e.target.files[0]);
                             }}
                         />
-                        {/* <ImageUploader
-                            withIcon={true}
-                            buttonText="Choose images"
-                            onChange={(picture) => set_image(picture)}
-                            imgExtension={[".jpg", ".png"]}
-                        /> */}
+
                         <label for="proof">Minh chứng</label>
+                    </div>
+                </div>
+                <div class="row left">
+                    <div class="col s12">
+                        <img src={link} style={{ width: 50, height: 50 }} />
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <a
-                    onClick={() => submit(_image)}
+                    onClick={() => onSubmitImage()}
                     class="modal-close waves-effect waves-light indigo accent-3 white-text btn-small button-1"
                 >
                     Thêm
