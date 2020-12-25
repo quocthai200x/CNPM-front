@@ -109,7 +109,7 @@ function DashBoard(props) {
 
                 <div className="row listkhoanthu-row">
                     <div className="col s5">
-                        <h4 id="dskt">Danh sách các khoản thu</h4>
+                        <h4 id="dskt">Danh sách phần thưởng</h4>
                     </div>
                     {/* <!-- nút tab khoản thu --> */}
                     <div className="col s4">
