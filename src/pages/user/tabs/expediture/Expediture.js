@@ -3,14 +3,24 @@ import ExpeditureDetail from "./ExpeditureDetail";
 import { getAllFeeAPI } from "../../../../apis/fee";
 
 function Expediture() {
-    const id = "5fe00c22c979b81a1007d93b";
-    const [data, setData] = useState({
-        id: "000000",
-        name: "Loading",
-        price: "000000",
-        from: "00000",
-        to: "00000",
-    });
+    // const id = "5fe00c22c979b81a1007d93b";
+    // const [data, setData] = useState({
+    //     id: "000000",
+    //     name: "Loading",
+    //     price: "000000",
+    //     from: "00000",
+    //     to: "00000",
+    // });
+
+    const [data, setData] = useState([
+        {
+            id: "000000",
+            name: "Loading",
+            price: "000000",
+            from: "00000",
+            to: "00000",
+        },
+    ]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -19,11 +29,17 @@ function Expediture() {
 
     const getData = async () => {
         const data = await getAllFeeAPI();
+<<<<<<< HEAD
         if(data.data.code == 1000){
             console.log(data.data.data);
             setData(data.data.data);
             setLoading(false);
         }
+=======
+        setData(data.data.data);
+        console.log(data.data.data);
+        setLoading(false);
+>>>>>>> linh
     };
     return (
         <div id="test1" className="col s12" style={{ padding: 0 }}>

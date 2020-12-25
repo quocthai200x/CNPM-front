@@ -22,6 +22,14 @@ function MemberList() {
         // them person vao liít
         setMembers([...members, person]);
     };
+
+    const updatePersonList = (person) => {
+        let index = members.findIndex((member) => member._id === person._id);
+        members[index] = person;
+        const newData = [...members];
+        setMembers(newData);
+    };
+
     return (
         <div>
             <table class="highlight centered">
@@ -66,7 +74,9 @@ function MemberList() {
                 </>
             </table>
             <ModalAddMember addPerson={(person) => addPersonToList(person)} />
-            <ModalChangeInfo />
+            <ModalChangeInfo
+                updatePerson={(person) => updatePersonList(person)}
+            />
             <br />
         </div>
     );

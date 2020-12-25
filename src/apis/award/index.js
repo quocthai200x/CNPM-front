@@ -8,6 +8,7 @@ export const getAwardDetailsAPI = (award_id = "",type = "0") =>{
     return axios.get(`/api/award/get-all-award-detail?award_id=${award_id}&type=${type}`)
 }
 
+<<<<<<< HEAD
 export const getAwardDoneAPI = (award_id = "", type = "0") =>{
     return axios.put(`/api/award/award-done?award_id=${award_id}&type=${type}`)
 }
@@ -38,3 +39,12 @@ export const createAwardAPI = (name,type,gifts,from,to,description) =>{
             description,  
     })
 }
+=======
+export const imageUploadAPI = (image, rank, id) => {
+    return axios.put(`/api/award/update-image-rank`, {
+        image,
+        rank,
+        id,
+    });
+};
+>>>>>>> linh
