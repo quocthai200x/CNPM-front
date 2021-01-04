@@ -1,3 +1,23 @@
+# Hướng dẫn sử dụng
+- Tải prj về
+- Cài nodejs về máy trên web: [Bản LTS](http://nodejs.org/en/)
+- Mở prj lên và gõ trong ternimal có đường dẫn đến prj này: npm install
+- Sau khi npm install xong, hãy gõ npm start
+- Chờ một lúc, trình duyệt sẽ hiện lên trang http://localhost:3000
+- Tại đây, sẽ hiện lên 2 khung đăng kí, đăng nhập dành cho các chủ hộ để vào trang cá nhân của hộ mình
+- Để vào trang quản lí của cán bộ, hãy chỉnh URL thành: [](http://localhost:3000/admin)
+- Danh sách các đường URL:
+ + [Trang admin](http://localhost:3000/admin)
+ + [Trang admin- khoản thu](http://localhost:3000/admin/khoan-thu)
+ + [Trang admin- phần thưởng](http://localhost:3000/admin/phan-thuong)
+ + [Trang user](http://localhost:3000/user)- (lưu ý: bắt buộc phải đăng nhập mới vào URL này)
+ + [Trang đăng kí user](http://localhost:3000/auth/register)
+ + [Trang đăng nhập user](http://localhost:3000/auth/sign-in)
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
