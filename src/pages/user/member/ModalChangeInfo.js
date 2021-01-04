@@ -7,7 +7,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 function ModalChangeInfo(props) {
     const [_name, set_name] = useState("");
-    const [_dob, set_dob] = useState(new Date());
+    const [_dob, set_dob] = useState(new Date("2010-12-12"));
     const [_gender, set_gender] = useState("");
     const [_workAt, set_workAt] = useState("");
     const [_idNumber, set_idNumber] = useState(0);

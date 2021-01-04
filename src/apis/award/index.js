@@ -4,8 +4,8 @@ export const getAllAwardAPI = (award_id = "") =>{
     return axios.get(`/api/award/?award_id=${award_id}`)
 }
 
-export const getAwardDetailsAPI = (award_id = "",type = "0") =>{
-    return axios.get(`/api/award/get-all-award-detail?award_id=${award_id}&type=${type}`)
+export const getAwardDetailsAPI = (award_id = "",type = "0",home_id = "") =>{
+    return axios.get(`/api/award/get-all-award-detail?award_id=${award_id}&type=${type}&home_id=${home_id}`)
 }
 
 export const getAwardDoneAPI = (award_id = "", type = "0") =>{

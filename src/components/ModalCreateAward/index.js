@@ -12,7 +12,7 @@ import "react-datepicker/dist/react-datepicker.css";
 function Modal(props) {
     const [_name, set_name] = useState("");
     const [_description, set_description] = useState("")
-    const [_type, set_type] = useState("1");
+    const [_type, set_type] = useState("2");
     const [_name_gift, set_name_gift] = useState("");
     const [_award_for, set_award_for] = useState("");
     const [_quantity, set_quantity] = useState(0);
@@ -67,7 +67,6 @@ function Modal(props) {
                 <div className="row">
                     <div className="input-field col s6">
                         <select onChange={(e) => set_type(e.target.value)} value={_type}>
-                            <option value="1">không cần minh chứng</option>
                             <option value="2">cần minh chứng</option>
                         </select>
                         <label>Loại</label>
