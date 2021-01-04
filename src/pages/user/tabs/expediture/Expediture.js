@@ -29,26 +29,20 @@ function Expediture() {
 
     const getData = async () => {
         const data = await getAllFeeAPI();
-<<<<<<< HEAD
         if(data.data.code == 1000){
             console.log(data.data.data);
             setData(data.data.data);
             setLoading(false);
         }
-=======
-        setData(data.data.data);
-        console.log(data.data.data);
-        setLoading(false);
->>>>>>> linh
     };
     return (
         <div id="test1" className="col s12" style={{ padding: 0 }}>
             <br />
-            <div className="row payment-info">
+            {/* <div className="row payment-info">
                 <div className="col s4">Tổng khoản thu tháng này:</div>
                 <div className="col s4">Số khoản thu còn phải đóng:</div>
                 <div className="col s4">Tổng số tiền phải nộp:</div>
-            </div>
+            </div> */}
 
             <table className="highlight centered">
                 <thead className="card-panel indigo accent-2">

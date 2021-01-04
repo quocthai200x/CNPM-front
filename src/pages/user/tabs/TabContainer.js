@@ -2,9 +2,12 @@ import React from "react";
 import Expediture from "./expediture/Expediture.js";
 import Reward from "./reward/Reward";
 import "./css/TabContainer.css";
+import ModalUpload from "./reward/ModalUpload";
 
 function TabContainer() {
     return (
+        <>
+        <ModalUpload />
         <div className="row">
             <div class="col s12">
                 <ul class="tabs">
@@ -26,6 +29,7 @@ function TabContainer() {
             <Expediture />
             <Reward />
         </div>
+        </>
     );
 }
 

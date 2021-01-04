@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import moment from "moment";
+
 import "./css/Modal.css";
 import { updatePersonAPI } from "../../../apis/info";
-
+import DatePicker from "react-datepicker";
+ 
+import "react-datepicker/dist/react-datepicker.css";
 function ModalChangeInfo(props) {
     const [_name, set_name] = useState("");
-    const [_dob, set_dob] = useState(moment(new Date()).format("L"));
+    const [_dob, set_dob] = useState(new Date());
     const [_gender, set_gender] = useState("");
     const [_workAt, set_workAt] = useState("");
     const [_idNumber, set_idNumber] = useState(0);
@@ -46,16 +48,10 @@ function ModalChangeInfo(props) {
                         </div>
                     </div>
                     <div class="row">
-                        <div class="input-field col s12">
-                            <input
-                                id="dob"
-                                type="text"
-                                class="datepicker"
-                                value={_dob}
-                                onChange={(e) => set_dob(e.target.value)}
-                            />
-                            <label for="dob">Ngày sinh</label>
-                        </div>
+                    <div className="col s12 left-align">
+                        <label for="dob">Ngày sinh</label>
+                        <DatePicker id = "dob" selected={_dob} onChange={date => set_dob(date)} />
+                    </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12">

@@ -13,7 +13,7 @@ function UserPage() {
 
     const getHomeID = async () =>{
         let home_id = await localStorage.getItem("home_id_logged");
-        console.log(home_id);
+        // console.log(home_id);
         // lấy home_id sau khi sign in, ở chỗ sign in đã setItem,bên này getItem
         if(home_id){
             set_home_id(home_id)
@@ -23,7 +23,7 @@ function UserPage() {
         <div>
             <NavBar title="Hộ gia đình" listLink={[{}]} />
             <div className="body container">
-                <UserInfo />
+                <UserInfo id = {_home_id}/>
                 <MemberList />
                 <TabContainer />
             </div>

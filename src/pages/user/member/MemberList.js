@@ -13,7 +13,8 @@ function MemberList() {
     }, []);
 
     const getData = async () => {
-        const data = await getHomeInfoAPI();
+        let home_id = await localStorage.getItem("home_id_logged");
+        const data = await getHomeInfoAPI(home_id);
         setMembers(data.data.members);
         setLoading(false);
     };

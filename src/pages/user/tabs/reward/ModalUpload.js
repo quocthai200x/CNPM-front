@@ -42,12 +42,21 @@ function ModalUpload(props) {
             });
     };
     // -----------------------
-    const onSubmitImage = () => {
-        imageUploadAPI(link, _rank, props.awardId);
+    const onSubmitImage = async () => {
+        let awardID = document
+        .getElementById("file-id")
+        .getAttribute("value");
+        const res = await imageUploadAPI(link, _rank, awardID);
+        if(res.data.code == 1000){
+            document.getElementById(awardID+"-child").getElementsByClassName("rank")[0].innerHTML = "Thành tích: " +_rank;
+            document.getElementById(awardID+"-child").getElementsByClassName("img")[0].setAttribute("src",link);
+            
+        }
+        console.log(res.data);
     };
 
     return (
-        <div id="add-proof" class="modal">
+        <div id="add-proof" class="modal add-proof-modal">
             <div class="modal-content">
                 <h4>Thêm hồ sơ nhận phần thưởng</h4>
 
@@ -60,10 +69,10 @@ function ModalUpload(props) {
                             <option value="" disabled selected>
                                 Chọn thành tích
                             </option>
-                            <option value="Học sinh khá">Học sinh khá</option>
                             <option value="Học sinh giỏi">Học sinh giỏi</option>
-                            <option value="Học sinh cực giỏi">
-                                Học sinh cực giỏi
+                            <option value="Học sinh khá">Học sinh khá</option>
+                            <option value="Học sinh trung bình">
+                                Học sinh trung bình
                             </option>
                         </select>
                         <label>Thành tích</label>

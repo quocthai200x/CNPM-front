@@ -12,10 +12,14 @@ function UserInfo(props) {
     }, []);
 
     const getData = async () => {
-        const data = await getHomeInfoAPI();
+        let home_id = await localStorage.getItem("home_id_logged");
+        // console.log(home_id);
+        // lấy home_id sau khi sign in, ở chỗ sign in đã setItem,bên này getItem
+        const data = await getHomeInfoAPI(home_id);
         setData(data.data);
         setLoading(false);
     };
+
 
     return (
         <>

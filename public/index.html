@@ -45,7 +45,6 @@
 
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
-<<<<<<< HEAD
     -->
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
@@ -61,48 +60,47 @@
     });
 
     $(document).ready(function () {
+        $(".add-proof-modal").modal({
+            onOpenStart: (elem, options) => {
+                // console.log(elem);
+                var node = document.createElement("DIV");
+                node.setAttribute("id", "file-id");
+                node.setAttribute("value", options.value);
+                elem.append(node);
+                // console.log(options.value);
+            },
+            onCloseEnd: (elem,options) =>{
+                console.log(elem);
+                document.getElementById('file-id').remove();
+            }
+        });
+    });
+
+    $(document).ready(function () {
         $(".image-view-modal").modal({
             onOpenStart: (elem, options) => {
                 let link = options.getElementsByTagName("img")[0].getAttribute("src");
                 elem.innerHTML = `
                         <img src = ${link} style = {{width : "100%",height:"auto"}}/>
                     `
-                
-    
             }
-=======
-    --></body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        })
+    });
 
-    <script>
-        $(document).ready(function () {
-            $(".tabs").tabs();
-        });
-        $(document).ready(function () {
-            $(".collapsible").collapsible();
-        });
-        $(document).ready(function () {
-            $(".modal").modal();
-        });
-        $(document).ready(function () {
-            $(".update-info").modal({
-                onOpenStart: (element, options) => {
-                    var node = document.createElement("DIV");
-                    node.setAttribute("id", "person-id");
-                    node.setAttribute("value", options.value);
-                    element.append(node);
-                },
-            });
-        });
-        $(document).ready(function () {
-            $("select").formSelect();
->>>>>>> linh
+    $(document).ready(function () {
+        $(".update-info").modal({
+            onOpenStart: (element, options) => {
+                var node = document.createElement("DIV");
+                node.setAttribute("id", "person-id");
+                node.setAttribute("value", options.value);
+                element.append(node);
+            },
         });
     });
-    
     $(document).ready(function () {
         $("select").formSelect();
     });
+
 
     $(document).ready(function () {
         $('.datepicker').datepicker({

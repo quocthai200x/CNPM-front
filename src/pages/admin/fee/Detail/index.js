@@ -180,7 +180,7 @@ function Detail(props) {
             {/* <!-- title --> */}
             <div class="row list-bill-row">
                 <div class="col s5">
-                    <h4 id="ctkt">{fee.name}</h4>
+                    <h4 id="ctkt">Chi tiết khoản thu</h4>
                 </div>
                 <div class="col s2">
                     {/* <span>Mã: null</span> */}
@@ -190,7 +190,6 @@ function Detail(props) {
                         class="material-icons left">edit</i>Sửa thông tin</a>
                     <a class="waves-effect waves-light btn-small red accent-2"><i
                         class="material-icons left">remove</i>Xóa khoản thu</a>
-
                 </div>
             </div>
             {/* <!-- bảng chi tiết --> */}

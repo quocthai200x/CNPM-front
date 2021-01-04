@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import "./index.css";
-import moment from "moment"
+
 import { createAwardAPI } from "../../apis/award";
+
+
+import DatePicker from "react-datepicker";
+ 
+import "react-datepicker/dist/react-datepicker.css";
+
 
 function Modal(props) {
     const [_name, set_name] = useState("");
@@ -11,8 +17,8 @@ function Modal(props) {
     const [_award_for, set_award_for] = useState("");
     const [_quantity, set_quantity] = useState(0);
     const [_price, set_price] = useState(0)
-    const [_from, set_from] = useState(moment(new Date()).format("L"));
-    const [_to, set_to] = useState(moment(new Date()).add(1, 'days').format("L"));
+    const [_from, set_from] = useState(new Date());
+    const [_to, set_to] = useState(new Date());
 
     const [_gifts, set_gifts] = useState([]);
     const createAward = async () => {
@@ -116,18 +122,16 @@ function Modal(props) {
                 </div>
 
 
+
                 <div className="row">
                     <div className="input-field col s6">
-                        <input id="from" type="text" className="datepicker " autoClose
-                            value={_from} onChange={(e) => set_from(e.target.value)}
-                        />
                         <label for="from">Từ</label>
+                        <DatePicker id = "from" selected={_from} onChange={date => {console.log(date);set_from(date)} }/>
+          
                     </div>
-                    <div className="input-field col s6">
-                        <input id="to" type="text" className="datepicker" autoClose
-                            value={_to} onChange={(e) => set_to(e.target.value)}
-                        />
+                    <div className="col s6">
                         <label for="to">Đến</label>
+                        <DatePicker id = "to" selected={_to} onChange={date => set_to(date)} />
                     </div>
                 </div>
             </div>

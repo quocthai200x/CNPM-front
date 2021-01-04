@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import RewardDetail from "./RewardDetail";
 import { getAllAwardAPI } from "../../../../apis/award/";
-import ModalUpload from "./ModalUpload";
 
 function Reward() {
     const [reward, set_reward] = useState([]);
@@ -48,7 +47,7 @@ function Reward() {
                     ))}
                 </ul>
             </div>
-            {/* <ModalUpload /> */}
+            
         </>
     );
 }
